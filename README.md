@@ -1,23 +1,19 @@
 # Docker mit Colima und Homebrew auf macOS
 
 In dieser Anleitung zeige ich dir, wie du Docker mit Colima und Homebrew auf deinem macOS-System installierst. Diese Dokumentation ergänzt mein [YouTube Tutorial](link-zu-deinem-video).
+Warum sollte ich Colima anstelle von Docker Desktop benutzen?
 
-## Voraussetzungen
+## Installation von Docker und Colima
 
-Stelle sicher, dass du Homebrew installiert hast. Wenn du Homebrew noch nicht installiert hast, kannst du es mit dem folgenden Befehl tun:
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-## Installation von Colima
-
-Colima ist ein Ersatz für Docker Desktop und ermöglicht es, Container auf macOS-Systemen auszuführen.
+Colima ist ein Ersatz für Docker Desktop und ermöglicht es, Container auf macOS-Systemen auszuführen. ([Quelle](https://apple.stackexchange.com/questions/373888/how-do-i-start-the-docker-daemon-on-macos))
 
 1. Öffne dein Terminal.
-2. Installiere Colima mit Homebrew:
+2. Installiere Colima und Docker mit Homebrew:
 
    ```bash
+   brew install docker
+   docker --version
+
    brew install colima
    ```
 
@@ -25,28 +21,7 @@ Colima ist ein Ersatz für Docker Desktop und ermöglicht es, Container auf macO
 
    ```bash
    colima start
-   ```
-
-## Installation von Docker
-
-Jetzt, da Colima läuft, kannst du Docker installieren.
-
-1. Installiere Docker CLI mit Homebrew:
-
-   ```bash
-   brew install docker
-   ```
-
-2. Teste die Installation, indem du die Docker-Version prüfst:
-
-   ```bash
-   docker --version
-   ```
-
-   Du solltest eine Ausgabe sehen, die in etwa so aussieht:
-
-   ```plaintext
-   Docker version 20.10.7, build f0df350
+   docker ps -a
    ```
 
 ## Verwendung von Docker mit Colima
@@ -81,7 +56,14 @@ Wenn du Fragen oder Probleme hast, hinterlasse bitte einen Kommentar unter meine
 
 Ich hoffe, diese Anleitung war hilfreich! Vielen Dank fürs Anschauen und viel Spaß beim Containerisieren!
 
-```
+## Troubleshooting
 
-Speichere den obigen Inhalt in einer Datei mit dem Namen `README.md`.
+Q: Warum startet Colima nicht mit der folgenden Error Meldung?
+`FATA [0002] error starting vm: error at 'starting': exit status 1`
+![Startprobleme mit Colima](image.png)
+
+A: Lösche den `cd ~/.colima` Verzeichnis und Starte mit Starte Colima mit dem folgenden Befehel
+
+```bash
+colima start --arch aarch64
 ```
